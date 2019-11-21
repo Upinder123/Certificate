@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap');
+@keyframes slideInFromLeft {
+	0% {
+	  transform: translateX(-100%);
+	}
+	80% {
+	  transform: translateX(10%);
+	}
+  }
 header
 {
 height:40px;
@@ -6,12 +15,15 @@ text-align:center;
 
 body
 {
-background-image:url('bck.jpg');
-font-family:"open sans",sans-serif;
+animation: 1s ease-out 0s 1 slideInFromLeft;
+background: #8186d5;
+/* font-family:"open sans",sans-serif; */
+font-family: "Varela Round";
 }
 
 table
 {
+
 margin:auto;
 text-align:left;
 }
