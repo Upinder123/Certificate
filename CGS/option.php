@@ -85,8 +85,8 @@ echo '
 <div class="page-header">
 			<h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
 		<p>
-			<a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-			<a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+			<a href="userModule/reset-password.php" class="btn btn-warning">Reset Your Password</a>
+			<a href="userModule/logout.php" class="btn btn-danger">Sign Out of Your Account</a>
 		</p>
 </div>
 <center><h2>(Manual Entry)</h2><table>
@@ -129,8 +129,8 @@ echo '  <body >
 	<div class="page-header">
 	<h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
 	<p>
-	<a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-	<a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+	<a href="userModule/reset-password.php" class="btn btn-warning">Reset Your Password</a>
+	<a href="userModule/logout.php" class="btn btn-danger">Sign Out of Your Account</a>
 	</p>
 	</div>
 	<center><h2>(CSV File Input)</h2>
