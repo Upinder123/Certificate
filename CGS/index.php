@@ -1,9 +1,14 @@
 <?php session_start(); ?>
 <?php
-
+echo getenv('APP_ROOT_PATH');
 require_once('../library/odf.php');
 $sel = $_GET["cert"];    //Represents Selection
 $odf = new odf("odt/design/$sel.odt");
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: userModule/login.php");
+    exit;
+}
 if($_SERVER['REQUEST_METHOD'] == 'POST')
 { 
 // storing data from html form to php variables
@@ -47,6 +52,13 @@ echo '
 	</head>
 
 	<body>
+	<div class="page-header">
+	<h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+	<p>
+		<a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
+		<a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+	</p>
+	</div>
 	<center>
 	<h2>Institute Details Saved Succesfully!</h2>
 	<h3>Please Select Next Option</h3>
@@ -216,79 +228,87 @@ if (check12==null || check12=="")
 
 	</head>
 	<body>
+		<div class="page-header">
+			<h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+			<p>
+				<a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
+				<a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+			</p>
+		</div>
 		<center>
     			<header><h1 style="font-family:verdana;">Institute Details</h1></header>
 		<p class="bottom-one">		
 			<center>
 <p class="bottom-one">			
-<table>
-<form name=new id=myform method=POST onSubmit ="return validateForm();">
-<tr> 
- <td>Institution Name:</td> 
- <td><input type=text name=in title="For e.g. Guru Nanak Dev Engineering College"></td>
-</tr>
+<div id = "back">
+	<table>
+		<form name="new" id="myform" method="POST" onsubmit ="return validateForm();">
+		<tr> 
+		<td>Institution Name:</td> 
+		<td><input type=text name=in title="For e.g. Guru Nanak Dev Engineering College"></td>
+		</tr>
 
-<tr> 
- <td>Aided Status:</td> 
- <td><input type=text name=as title="For e.g. Punjab Govt. Aided Status"></td>
-</tr>
+		<tr> 
+		<td>Aided Status:</td> 
+		<td><input type=text name=as title="For e.g. Punjab Govt. Aided Status"></td>
+		</tr>
 
-<tr> 
- <td>Institute Tagline:</td> 
- <td><input type=text name=it title="For e.g. An Autonomous College u/s 2(f) and 12(B) of UGC Act 1956"></td>
-</tr>
+		<tr> 
+		<td>Institute Tagline:</td> 
+		<td><input type=text name=it title="For e.g. An Autonomous College u/s 2(f) and 12(B) of UGC Act 1956"></td>
+		</tr>
 
-<tr>
- <td>Affiliation:</td> 
- <td><input type=text name=a title="For e.g. AICTE Approved, NBA Accreditted, Affiliated to PTU, Jalandhar"></td>
-</tr>
+		<tr>
+		<td>Affiliation:</td> 
+		<td><input type=text name=a title="For e.g. AICTE Approved, NBA Accreditted, Affiliated to PTU, Jalandhar"></td>
+		</tr>
 
-<tr>
- <td>Event:</td> 
- <td><input type=text name=e title="For e.g. Six Week Training"></td>
-</tr>
+		<tr>
+		<td>Event:</td> 
+		<td><input type=text name=e title="For e.g. Six Week Training"></td>
+		</tr>
 
-<tr>
- <td>Topic:</td> 
- <td><input type=text name=t title="For e.g. Computing Technology"></td>
-</tr>
+		<tr>
+		<td>Topic:</td> 
+		<td><input type=text name=t title="For e.g. Computing Technology"></td>
+		</tr>
 
-<tr>
- <td>Signature(Left):</td> 
- <td><input type=text name=s1 title="For e.g. Dr M S Saini"></td>
-</tr>
+		<tr>
+		<td>Signature(Left):</td> 
+		<td><input type=text name=s1 title="For e.g. Dr M S Saini"></td>
+		</tr>
 
-<tr>
- <td>Designation:</td> 
- <td><input type=text name=d1 title="For e.g. Director"></td>
-</tr>
+		<tr>
+		<td>Designation:</td> 
+		<td><input type=text name=d1 title="For e.g. Director"></td>
+		</tr>
 
-<tr>
- <td>Signature(Middle):</td> 
- <td><input type=text name=s2 ></td>
-</tr>
+		<tr>
+		<td>Signature(Middle):</td> 
+		<td><input type=text name=s2 ></td>
+		</tr>
 
-<tr>
- <td>Designtion:</td> 
- <td><input type=text name=d2 ></td>
-</tr>
+		<tr>
+		<td>Designtion:</td> 
+		<td><input type=text name=d2 ></td>
+		</tr>
 
-<tr>
- <td>Signature(Right):</td> 
- <td><input type=text name=s3 ></td>
-</tr>
+		<tr>
+		<td>Signature(Right):</td> 
+		<td><input type=text name=s3 ></td>
+		</tr>
 
-<tr>
- <td>Desigantion:</td> 
- <td><input type=text name=d3 ></td>
-</tr>
-  
-</table>
-<input class="btn btn-primary" type=submit name=Submit value=Submit>
+		<tr>
+		<td>Desigantion:</td> 
+		<td><input type=text name=d3 ></td>
+		</tr>
+		
+	</table>
+</div>
+<input class="btn btn-primary" type="submit" name="Submit" value="Submit">
 </center>
 </p>
 </form>
 </br>
 </body>
 </html>
-

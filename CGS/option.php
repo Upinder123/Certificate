@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <html>
 	<head>		
 		<title>Candidate Details</title>
@@ -72,11 +72,23 @@ if (check6==null || check6=="")
 
 
 <?php
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: userModule/login.php");
+    exit;
+}
 if($_SERVER['REQUEST_METHOD'] == 'GET' && $_GET["var"] == "manual")		//On Selecting Manual Entry
 
 {
 echo '
 <body>
+<div class="page-header">
+			<h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+		<p>
+			<a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
+			<a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+		</p>
+</div>
 <center><h2>(Manual Entry)</h2><table>
 <p class ="bottom-one">
 <form name=new action="manual.php" method="post" enctype="multipart/form-data" onSubmit="return validateForm();">
@@ -114,6 +126,13 @@ exit;
 elseif($_SERVER['REQUEST_METHOD'] == 'GET' && $_GET["var"] == "csv")		//on selecting upload csv file
 {
 echo '  <body >
+	<div class="page-header">
+	<h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+	<p>
+	<a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
+	<a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+	</p>
+	</div>
 	<center><h2>(CSV File Input)</h2>
 	<h4>Data format in (.csv) file</h4>
 	<p> <li> Initials,Firstname,Middlename,lastname,institute,city,state,photo</li>

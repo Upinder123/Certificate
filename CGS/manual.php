@@ -5,7 +5,11 @@ $base = $_SESSION["base"]; 				//Getting file name with filled Institute Details
 $odf = new odf("odt/base/$base.odt");   		//Initializing the object with above file name
 $id = uniqid();
 $_SESSION['id'] = $id;					//To be used with filenames to differentiate simultaneous files being processed
-
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: userModule/login.php");
+    exit;
+}
 if ($_SERVER['REQUEST_METHOD'] == 'POST')  
 {
 // Assigning Form data to sesssion variables to be used in next step.
@@ -162,6 +166,13 @@ echo   '<html>
 	<link href="style/style.css" rel="stylesheet" media="screen">
 	</head>
 	<body>
+	<div class="page-header">
+        <h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+    <p>
+        <a href="userModule/reset-password.php" class="btn btn-warning">Reset Your Password</a>
+        <a href="userModule/logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+    </p>
+	</div>
 	<center>	
 	<h1>Your Certificate has been Generated!</h1>
 	<form action="odt/cert/'.$id.'.odt">
@@ -242,7 +253,13 @@ exit;
 
 </head>
 <body background="html/bck.jpg">
-
+<div class="page-header">
+			<h1>Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+			<p>
+			<a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
+			<a href="logout.php" class="btn btn-danger">Sign Out of Your Account</a>
+			</p>		
+</div>
 <div class="container">
 <div class="row">
 <div class="span12">
